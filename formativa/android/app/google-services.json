@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "312921771175",
+    "project_id": "livraria-34c00",
+    "storage_bucket": "livraria-34c00.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312921771175:android:efeeaa20281b778d1d5f82",
+        "android_client_info": {
+          "package_name": "com.formativa.formativa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7YxsHA1n4yL0-taOlz-ilnT7SyLQKn5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
