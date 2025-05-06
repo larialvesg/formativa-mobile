@@ -60,11 +60,14 @@ class _PutlivrosState extends State<Putlivros> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Edite os dados do seu livro')),
+      appBar: AppBar(title: Text('${widget.nome_lista}', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),), backgroundColor:  Color(0xFF2f6fc4),),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(2.0),
         child: Column(
           children: [
+            Image.network(widget.capa_lista,
+            width: MediaQuery.of(context).size.width *0.5  ,
+            ),
             TextField(
               controller: nomeController,
               decoration: InputDecoration(labelText: 'Nome do livro'),

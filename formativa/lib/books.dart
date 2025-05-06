@@ -65,7 +65,7 @@ class Books extends StatelessWidget {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: const Color.fromARGB(255, 255, 255, 255),
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: const [
                               BoxShadow(
@@ -83,8 +83,6 @@ class Books extends StatelessWidget {
                                 width: 130,
                                 height: 170,
                                 fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    const Icon(Icons.image_not_supported, size: 100),
                               ),
                               const SizedBox(height: 12),
                               Padding(
@@ -93,7 +91,7 @@ class Books extends StatelessWidget {
                                   data['nome'],
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
-                                    color: Color.fromARGB(255, 51, 77, 112),
+                                    color: Color.fromARGB(255, 25, 40, 59),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
@@ -104,7 +102,7 @@ class Books extends StatelessWidget {
                                 data['autor'],
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                  color: Color.fromARGB(255, 51, 77, 112),
+                                  color: Color.fromARGB(255, 25, 40, 59),
                                   fontSize: 14,
                                 ),
                               ),
@@ -112,7 +110,7 @@ class Books extends StatelessWidget {
                                 data['genero'],
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                  color:Color.fromARGB(255, 51, 77, 112),
+                                  color:Color.fromARGB(255, 25, 40, 59),
                                   fontSize: 14,
                                 ),
                               ),

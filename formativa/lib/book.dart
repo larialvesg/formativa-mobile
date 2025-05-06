@@ -39,10 +39,12 @@ class _LivrosState extends State<Livros> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
+        
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(color: Color(0xFF2f6fc4)),
+        decoration: BoxDecoration(color: Colors.white),
         child: Center(
           child: Column(
             children: [
