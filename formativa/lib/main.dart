@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:formativa/login.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:formativa/books.dart';
+import 'package:formativa/login.dart';
+import 'package:formativa/navigation.dart';
 import 'firebase_options.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
 
@@ -13,16 +13,13 @@ await Firebase.initializeApp(
 );
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        
+      theme: ThemeData( 
       ),
       home: LoginPage(),
     );

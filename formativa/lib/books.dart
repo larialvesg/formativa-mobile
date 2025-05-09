@@ -8,14 +8,11 @@ class Books extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF18202A),
       body: SafeArea(
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-  
-            ),
+            const Padding(padding: EdgeInsets.all(16.0)),
             Expanded(
               child: FutureBuilder<QuerySnapshot>(
                 future: FirebaseFirestore.instance.collection('livros').get(),
@@ -23,7 +20,6 @@ class Books extends StatelessWidget {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   }
-
                   if (snapshot.hasError) {
                     return const Center(
                       child: Text(
@@ -32,90 +28,89 @@ class Books extends StatelessWidget {
                       ),
                     );
                   }
-
                   final livros = snapshot.data!.docs;
-
                   return GridView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      childAspectRatio: 0.65,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
                     ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 15,
+                          mainAxisSpacing: 35,
+                          childAspectRatio: 0.5,
+                        ),
                     itemCount: livros.length,
                     itemBuilder: (context, index) {
                       final livro = livros[index];
                       final data = livro.data() as Map<String, dynamic>;
-
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Putlivros(
-                                documentId: livro.id,
-                                nome_lista: data['nome'] ?? '',
-                                genero_lista: data['genero'] ?? '',
-                                autor_lista: data['autor'] ?? '',
-                                capa_lista: data['imagem'] ?? '',
-                              ),
+                              builder:
+                                  (context) => Putlivros(
+                                    documentId: livro.id,
+                                    nome_lista: data['nome'] ?? '',
+                                    genero_lista: data['genero'] ?? '',
+                                    autor_lista: data['autor'] ?? '',
+                                    capa_lista: data['imagem'] ?? '',
+                                    avaliacao_lista: data["avaliacao"] ?? '',
+                                  ),
                             ),
                           );
                         },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 4,
-                                offset: Offset(2, 4),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.20,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.network(
-                                data['imagem'],
-                                width: 130,
-                                height: 170,
-                                fit: BoxFit.cover,
+                              clipBehavior: Clip.hardEdge,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  data['imagem'],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                              const SizedBox(height: 12),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(
-                                  data['nome'],
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    color: Color.fromARGB(255, 25, 40, 59),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                            ),
+
+                            const SizedBox(height: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white12,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                    size: 16,
                                   ),
-                                ),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    data['avaliacao'],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(height: 4),
-                              Text(
-                                data['autor'],
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 25, 40, 59),
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                data['genero'],
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color:Color.fromARGB(255, 25, 40, 59),
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       );
                     },

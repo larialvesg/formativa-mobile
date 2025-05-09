@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Livros extends StatefulWidget {
@@ -15,6 +13,7 @@ class _LivrosState extends State<Livros> {
   String autor = "";
   String genero = "";
   String capa = "";
+  String avaliacao = "";
 
   @override
   void initState() {
@@ -32,6 +31,7 @@ class _LivrosState extends State<Livros> {
         autor = (data['autor'] ?? "Não disponível");
         genero = (data['genero'] ?? "Não disponível");
         capa = (data['imagem'] ?? "Não disponível");
+        avaliacao = (data["avaliacao"]?? "Não disponível");
       });
     });
   }

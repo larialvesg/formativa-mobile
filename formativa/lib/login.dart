@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formativa/books.dart';
-import 'package:formativa/main.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:formativa/navigation.dart';
 
 TextEditingController _user = TextEditingController();
 TextEditingController _pass = TextEditingController();
@@ -48,7 +44,6 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(child: Image.asset('assets/images/bambi.png')),
-
             Text(
               "Bem vindo a sua biblioteca virtual!",
               style: TextStyle(
@@ -121,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                 if (Logar()) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Books()),
+                    MaterialPageRoute(builder: (context) => NavApp()),
                   );
                 }
               },

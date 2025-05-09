@@ -7,6 +7,7 @@ class Putlivros extends StatefulWidget {
   final String genero_lista;
   final String autor_lista;
   final String capa_lista;
+  final String avaliacao_lista;
 
   const Putlivros({
     super.key,
@@ -15,6 +16,7 @@ class Putlivros extends StatefulWidget {
     required this.genero_lista,
     required this.autor_lista,
     required this.capa_lista,
+    required this.avaliacao_lista,
   });
 
   @override
@@ -26,6 +28,7 @@ class _PutlivrosState extends State<Putlivros> {
   TextEditingController generoController = TextEditingController();
   TextEditingController autorController = TextEditingController();
   TextEditingController capaController = TextEditingController();
+  TextEditingController avaliacaoController = TextEditingController();
 
   @override
   void initState() {
@@ -34,6 +37,7 @@ class _PutlivrosState extends State<Putlivros> {
     generoController.text = widget.genero_lista;
     autorController.text = widget.autor_lista;
     capaController.text = widget.capa_lista;
+    avaliacaoController.text = widget.avaliacao_lista; 
   }
 
   Future<void> updateLivro() async {
@@ -41,12 +45,13 @@ class _PutlivrosState extends State<Putlivros> {
     String genero = generoController.text;
     String autor = autorController.text;
     String capa = capaController.text;
+    String avaliacao = avaliacaoController.text;
 
     await FirebaseFirestore.instance
         .collection('livros')
         .doc(widget.documentId)
         .set(
-          {'nome': nome, 'genero': genero, "autor": autor, "imagem": capa},
+          {'nome': nome, 'genero': genero, "autor": autor, "imagem": capa, "avaliacao": avaliacao},
           SetOptions(merge: true),
         );
 
@@ -60,13 +65,20 @@ class _PutlivrosState extends State<Putlivros> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('${widget.nome_lista}', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),), backgroundColor:  Color(0xFF2f6fc4),),
+      appBar: AppBar(
+        title: Text(
+          widget.nome_lista,
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Color(0xFF2f6fc4),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Column(
           children: [
-            Image.network(widget.capa_lista,
-            width: MediaQuery.of(context).size.width *0.5  ,
+            Image.network(
+              widget.capa_lista,
+              width: MediaQuery.of(context).size.width * 0.5,
             ),
             TextField(
               controller: nomeController,
@@ -83,6 +95,11 @@ class _PutlivrosState extends State<Putlivros> {
             TextField(
               controller: capaController,
               decoration: InputDecoration(labelText: 'URL da capa'),
+            ),
+            TextField(
+              controller: avaliacaoController,
+              decoration: InputDecoration(labelText: 'Avaliação do Livro'),
+
             ),
             SizedBox(height: 20),
             ElevatedButton(
