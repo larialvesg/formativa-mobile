@@ -22,91 +22,115 @@ class _LivrosState extends State<Livros> {
   }
 
   void fetchData() {
-    FirebaseFirestore.instance.collection('livros').snapshots().listen((
-      snapshot,
-    ) {
-      var data = snapshot.docs.last.data();
-      setState(() {
-        nome = (data['nome'] ?? "Não disponível");
-        autor = (data['autor'] ?? "Não disponível");
-        genero = (data['genero'] ?? "Não disponível");
-        capa = (data['imagem'] ?? "Não disponível");
-        avaliacao = (data["avaliacao"]?? "Não disponível");
-      });
+    FirebaseFirestore.instance.collection('livros').snapshots().listen((snapshot) {
+      if (snapshot.docs.isNotEmpty) {
+        var data = snapshot.docs.last.data();
+        setState(() {
+          nome = (data['nome'] ?? "Não disponível");
+          autor = (data['autor'] ?? "Não disponível");
+          genero = (data['genero'] ?? "Não disponível");
+          capa = (data['imagem'] ?? "");
+          avaliacao = (data["avaliacao"] ?? "Não disponível");
+        });
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(color: Colors.white),
-        child: Center(
-          child: Column(
-            children: [
-              const SizedBox(height: 70),
-              Container(
-                width: 250,
-                height: 400,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
-                      spreadRadius: 2,
-                    ),
-                  ],
+      backgroundColor: const Color(0xFF18202A),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            Text(
+              nome,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            Container(
+              width: 200,
+              height: 300,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    offset: Offset(0, 4),
+                  )
+                ],
+              ),
+              clipBehavior: Clip.hardEdge,
+              child: Image.network(
+                capa,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => const Icon(
+                  Icons.broken_image,
+                  size: 100,
+                  color: Colors.white30,
                 ),
-                child: Center(
-                  child: Container(
-                    width: 290,
-                    height: 370,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10), 
-                      image: DecorationImage(
-                        image: NetworkImage(capa),
-                        fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              "Autor: $autor",
+              style: const TextStyle(fontSize: 18, color: Colors.white70),
+            ),
+            Text(
+              "Gênero: $genero",
+              style: const TextStyle(fontSize: 18, color: Colors.white70),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.white12,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.star, color: Colors.yellow, size: 16),
+                      const SizedBox(width: 5),
+                      Text(
+                        avaliacao,
+                        style: const TextStyle(color: Colors.white, fontSize: 16),
                       ),
-                    ),
+                    ],
                   ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white24,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-              const SizedBox(height: 20),
-              Text(
-                nome,
+              child: const Text(
+                "Voltar",
                 style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
                   color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                "Autor: $autor",
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              Text(
-                "Gênero: $genero",
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                child: Text(
-                  "Voltar",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
