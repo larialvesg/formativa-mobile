@@ -45,12 +45,12 @@ class _PutlivrosState extends State<Putlivros> {
         .collection('livros')
         .doc(widget.documentId)
         .set({
-          'nome': nomeController.text,
-          'genero': generoController.text,
-          'autor': autorController.text,
-          'imagem': capaController.text,
-          'avaliacao': avaliacaoController.text,
-        }, SetOptions(merge: true));
+      'nome': nomeController.text,
+      'genero': generoController.text,
+      'autor': autorController.text,
+      'imagem': capaController.text,
+      'avaliacao': avaliacaoController.text,
+    }, SetOptions(merge: true));
 
     ScaffoldMessenger.of(
       context,
@@ -64,110 +64,126 @@ class _PutlivrosState extends State<Putlivros> {
     return Scaffold(
       backgroundColor: Color(0xff18202A),
       appBar: AppBar(
-        title: Text(widget.nome_lista, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        backgroundColor: Color(0xff2f6fc4),
+        title: Text(
+          widget.nome_lista,
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Color.fromARGB(255, 25, 62, 114),
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            Image.network(
-              widget.capa_lista,
-              width: MediaQuery.of(context).size.width * 0.45,
-              height: MediaQuery.of(context).size.height * 0.3,
-              fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                widget.capa_lista,
+                width: MediaQuery.of(context).size.width * 0.45,
+                height: MediaQuery.of(context).size.height * 0.3,
+                fit: BoxFit.cover,
+              ),
             ),
-            SizedBox(height: 22),
+            SizedBox(height: 25),
             TextField(
               controller: nomeController,
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 labelText: 'Nome do livro',
-                labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                labelStyle: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white30),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(255, 25, 64, 95)),
                 ),
                 filled: true,
                 fillColor: Colors.white12,
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 22),
             TextField(
               controller: generoController,
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 labelText: 'Gênero',
-                labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                labelStyle: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white30),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(255, 25, 64, 95)),
                 ),
                 filled: true,
                 fillColor: Colors.white12,
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 22),
             TextField(
               controller: autorController,
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 labelText: 'Autor',
-                labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                labelStyle: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white30),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(255, 25, 64, 95)),
                 ),
                 filled: true,
                 fillColor: Colors.white12,
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 22),
             TextField(
               controller: capaController,
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 labelText: 'URL da capa',
-                labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                labelStyle: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white30),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(255, 25, 64, 95)),
                 ),
                 filled: true,
                 fillColor: Colors.white12,
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 22),
             TextField(
               controller: avaliacaoController,
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 labelText: 'Avaliação do Livro',
-                labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                labelStyle: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white30),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(255, 25, 64, 95)),
                 ),
                 filled: true,
                 fillColor: Colors.white12,
               ),
             ),
-            SizedBox(height: 18),
+            SizedBox(height: 22),
             ElevatedButton(
               onPressed: updateLivro,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF2f6fc4),
+                backgroundColor: Color.fromARGB(255, 25, 64, 95),
                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),

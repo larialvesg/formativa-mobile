@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:formativa/book.dart';
+
 import 'package:formativa/books.dart';
+import 'package:formativa/post.dart';
 
 class NavApp extends StatefulWidget {
   const NavApp({super.key});
@@ -15,7 +16,7 @@ class _NavAppState extends State<NavApp> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     Books(),
-    Livros(),
+    PostLivros(),
   ];
 
   void onItemTapped(int index) {
@@ -34,8 +35,8 @@ class _NavAppState extends State<NavApp> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color(0xFF18202A),
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Color(0xFF2f6fc4),
+        selectedItemColor: Color(0xFF2f6fc4),
+        unselectedItemColor: Colors.white,
         onTap: onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

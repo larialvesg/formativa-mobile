@@ -27,7 +27,8 @@ class Books extends StatelessWidget {
             ),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance.collection('livros').snapshots(),
+                stream:
+                    FirebaseFirestore.instance.collection('livros').snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
@@ -53,7 +54,6 @@ class Books extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final livro = livros[index];
                       final data = livro.data() as Map<String, dynamic>;
-
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -62,14 +62,15 @@ class Books extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Putlivros(
-                                    documentId: livro.id,
-                                    nome_lista: data['nome'] ?? '',
-                                    genero_lista: data['genero'] ?? '',
-                                    autor_lista: data['autor'] ?? '',
-                                    capa_lista: data['imagem'] ?? '',
-                                    avaliacao_lista: data["avaliacao"] ?? '',
-                                  ),
+                                  builder:
+                                      (context) => Putlivros(
+                                        documentId: livro.id,
+                                        nome_lista: data['nome'] ?? '',
+                                        genero_lista: data['genero'] ?? '',
+                                        autor_lista: data['autor'] ?? '',
+                                        capa_lista: data['imagem'] ?? '',
+                                        avaliacao_lista:data["avaliacao"] ?? '',
+                                      ),
                                 ),
                               );
                             },
@@ -105,7 +106,11 @@ class Books extends StatelessWidget {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(Icons.star, color: Colors.yellow, size: 16),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                      size: 16,
+                                    ),
                                     SizedBox(width: 5),
                                     Text(
                                       data['avaliacao'],
@@ -117,7 +122,7 @@ class Books extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              SizedBox(width: 25),
+                              SizedBox(width: 33),
                               GestureDetector(
                                 onTap: () async {
                                   await FirebaseFirestore.instance
