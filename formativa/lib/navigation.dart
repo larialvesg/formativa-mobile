@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:formativa/api.dart';
 
 import 'package:formativa/books.dart';
+import 'package:formativa/loginAULA.dart';
+import 'package:formativa/mapa.dart';
 import 'package:formativa/post.dart';
 
 class NavApp extends StatefulWidget {
@@ -17,6 +20,8 @@ class _NavAppState extends State<NavApp> {
   static final List<Widget> _widgetOptions = <Widget>[
     Books(),
     PostLivros(),
+    Mapa(),
+    TelaGet()
   ];
 
   void onItemTapped(int index) {
@@ -24,11 +29,10 @@ class _NavAppState extends State<NavApp> {
       selectedIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF18202A),
+      backgroundColor: Color.fromARGB(255, 1, 31, 68),
       body: Center(
         child: _widgetOptions.elementAt(selectedIndex),
       ),
@@ -36,9 +40,9 @@ class _NavAppState extends State<NavApp> {
         backgroundColor: Color(0xFF18202A),
         currentIndex: selectedIndex,
         selectedItemColor: Color(0xFF2f6fc4),
-        unselectedItemColor: Colors.white,
+        unselectedItemColor:   Color.fromARGB(255, 1, 31, 68),
         onTap: onItemTapped,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -46,6 +50,14 @@ class _NavAppState extends State<NavApp> {
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
             label: 'Adicionar Livro',
+          ),
+           BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Mapa',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.cloud),
+            label: 'API',
           ),
         ],
       ),

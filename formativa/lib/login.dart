@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:formativa/books.dart';
+import 'package:formativa/auth.dart';
+import 'package:formativa/cadastro.dart';
 import 'package:formativa/navigation.dart';
-
-TextEditingController _user = TextEditingController();
-TextEditingController _pass = TextEditingController();
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,33 +11,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String usuario_cadastrado = 'larissa';
-  String senha_cadastrada = 'alves';
-  String verificador = "";
-
-  bool Logar() {
-    if (_user.text == usuario_cadastrado && _pass.text == senha_cadastrada) {
-      print("Login realizado com sucesso");
-      return true;
-    } else {
-      print("Credenciais erradas");
-      setState(() {
-        verificador = 'Credenciais Erradas';
-      });
-      return false;
-    }
-  }
+  TextEditingController _email = TextEditingController();
+  TextEditingController _senha = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  Color(0xFF2f6fc4),
-      
+      backgroundColor: Color(0xFF2f6fc4),
       body: Padding(
-        
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
-          
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -58,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 50),
             TextField(
-              textAlign: TextAlign.start,
+              controller: _email,
               style: TextStyle(color: Color(0xff182537)),
               decoration: InputDecoration(
                 hintText: 'Digite seu usuário :',
@@ -77,15 +58,14 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(25),
                 ),
               ),
-              controller: _user,
             ),
             const SizedBox(height: 30),
             TextField(
-              textAlign: TextAlign.start,
+              controller: _senha,
               obscureText: true,
               style: TextStyle(color: Color(0xff182537)),
               decoration: InputDecoration(
-                hintText: 'Digite seu senha: ',
+                hintText: 'Digite sua senha:',
                 hintStyle: TextStyle(
                   color: Color(0xff182537),
                   fontSize: 15,
@@ -101,26 +81,59 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(25),
                 ),
               ),
-              controller: _pass,
             ),
             const SizedBox(height: 45),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xff182537),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 60,
-                  vertical: 8,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    final message = await AuthService().login(
+                      email: _email.text,
+                      password: _senha.text,
+                    );
+                    if (message!.contains("Success")) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => NavApp()),
+                      );
+                    }
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(message)));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 25, 62, 114),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text(
+                    "LOGIN",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
                 ),
-              ),
-              onPressed: () {
-                if (Logar()) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NavApp()),
-                  );
-                }
-              },
-              child: Text("Logar", style: TextStyle(color: Colors.white)),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Cadastro()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 25, 62, 114),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text(
+                    "CADASTRAR",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
