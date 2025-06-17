@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:formativa/putlivros.dart';
 
+// Essa é a nossa pagina inicial, onde realizaremos o GET dos livros
 class Books extends StatelessWidget {
   const Books({super.key});
 
@@ -64,6 +65,7 @@ class Books extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder:
                                       (context) => Putlivros(
+                                        // puxando informações dos livros do database
                                         documentId: livro.id,
                                         nome_lista: data['nome'] ?? '',
                                         genero_lista: data['genero'] ?? '',
@@ -84,6 +86,7 @@ class Books extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
                                 child: Image.network(
+                                  // mostrando imagem
                                   data['imagem'],
                                   fit: BoxFit.cover,
                                 ),
@@ -123,6 +126,7 @@ class Books extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(width: 33),
+                              // aqui quando o usuario clica no icone de lixeira, o livro é removido do app/firebase
                               GestureDetector(
                                 onTap: () async {
                                   await FirebaseFirestore.instance

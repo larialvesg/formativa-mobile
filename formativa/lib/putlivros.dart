@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Pagina de atualizar livros 
+
 class Putlivros extends StatefulWidget {
   final String documentId;
   final String nome_lista;
@@ -85,6 +87,7 @@ class _PutlivrosState extends State<Putlivros> {
               ),
             ),
             SizedBox(height: 25),
+            // espaços onde os dados que ja existem dos livros são puxados, usuario pode editar as informações
             TextField(
               controller: nomeController,
               style: TextStyle(color: Colors.white),
@@ -180,6 +183,7 @@ class _PutlivrosState extends State<Putlivros> {
               ),
             ),
             SizedBox(height: 22),
+            // botao para salvar dados atualizados e enviar para o firebase
             ElevatedButton(
               onPressed: updateLivro,
               style: ElevatedButton.styleFrom(

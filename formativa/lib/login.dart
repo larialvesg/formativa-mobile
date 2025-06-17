@@ -3,6 +3,8 @@ import 'package:formativa/auth.dart';
 import 'package:formativa/cadastro.dart';
 import 'package:formativa/navigation.dart';
 
+// Pagina de login
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -39,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 50),
             TextField(
+              // espaço para o usuario digitar o usuario
               controller: _email,
               style: TextStyle(color: Color(0xff182537)),
               decoration: InputDecoration(
@@ -61,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 30),
             TextField(
+              // espaço para o usuario digitar a senha
               controller: _senha,
               obscureText: true,
               style: TextStyle(color: Color(0xff182537)),
@@ -86,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                // botao de login
                 ElevatedButton(
                   onPressed: () async {
                     final message = await AuthService().login(
@@ -114,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
+                // botao para ir para a tela de cadastro 
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(

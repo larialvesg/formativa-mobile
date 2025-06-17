@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+// pagina de mapa
 class Mapa extends StatefulWidget {
   const Mapa({super.key});
 
@@ -12,6 +13,7 @@ class _MapaState extends State<Mapa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // inserindo as configurações do mapa no app
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
           target: LatLng(-22.9697, -46.9978),

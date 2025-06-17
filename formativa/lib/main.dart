@@ -5,6 +5,7 @@ import 'package:formativa/login.dart';
 import 'package:formativa/navigation.dart';
 import 'firebase_options.dart';
 
+// Pagina main
 void main() async {
 
 WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData( 
       ),
+      // nossa home na verdade é a pagina login
       home: LoginPage(),
     );
   }

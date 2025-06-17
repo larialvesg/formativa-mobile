@@ -4,6 +4,8 @@ import 'package:formativa/books.dart';
 import 'package:formativa/login.dart';
 import 'package:formativa/navigation.dart';
 
+ // Pagina de post dos livros
+
 class PostLivros extends StatefulWidget {
   const PostLivros({super.key});
 
@@ -26,6 +28,7 @@ class _PostLivrosScreenState extends State<PostLivros> {
     final String avaliacao = avaliacaoController.text;
 
     await FirebaseFirestore.instance.collection('livros').add({
+      // puxando dados e variaveis
       'nome': nome,
       'genero': genero,
       'autor': autor,
@@ -64,6 +67,7 @@ class _PostLivrosScreenState extends State<PostLivros> {
                   color: Colors.white,
                 ),
               ),
+               // espaços para preencher os dados do livro que será postado
               SizedBox(height: 30),
               TextField(
                 controller: nomeController,
@@ -165,6 +169,7 @@ class _PostLivrosScreenState extends State<PostLivros> {
                 ),
               ),
               SizedBox(height: 28),
+              // botao de enviar os dados para o firebase
               ElevatedButton(
                 onPressed: postData,
                 style: ElevatedButton.styleFrom(

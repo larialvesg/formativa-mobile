@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:formativa/auth.dart';
 import 'package:formativa/books.dart';
 
+// Essa é a nossa tela de cadastro
+
 class Cadastro extends StatefulWidget {
   const Cadastro({super.key});
 
@@ -30,6 +32,7 @@ class _CadastroState extends State<Cadastro> {
           padding: EdgeInsets.all(16),
           child: Column(
             children: [
+              // espaço pro usuario digitar e-mail
               TextField(
                 controller: _email,
                 style: TextStyle(color: Colors.white),
@@ -51,6 +54,7 @@ class _CadastroState extends State<Cadastro> {
               ),
               SizedBox(height: 28),
               TextField(
+                // espaço para o usuario digitar a senha
                 controller: _senha,
                 obscureText: true,
                 obscuringCharacter: "*",
@@ -75,6 +79,7 @@ class _CadastroState extends State<Cadastro> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  // botao para mandar dados para o cadastro
                   ElevatedButton(
                     onPressed: () async {
                       final message = await AuthService().registration(
